@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="XamarinFormsRelativeSourceSample.Views.MainPage"
+             xmlns:dataTypes="clr-namespace:XamarinFormsRelativeSourceSample.DataTypes"
+             xmlns:viewModels="clr-namespace:XamarinFormsRelativeSourceSample.ViewModels"
+             Title="{Binding Title}">
+
+    <ListView ItemsSource="{Binding Items}">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <StackLayout BindingContext="{Binding Source={RelativeSource AncestorType={x:Type dataTypes:Item}}}"
+                                 Orientation="Horizontal">
+                        <Button Text="削除"
+                                Command="{Binding DeleteItemCommand, Source={RelativeSource AncestorType={x:Type viewModels:MainPageViewModel}}}"
+                                CommandParameter="{Binding}" />
+                        <Label Text="{Binding Name}" />
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+
+</ContentPage>
